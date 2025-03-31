@@ -1,7 +1,9 @@
 FROM cypress/browsers:latest
 RUN apt-get update -y &&apt-get install -y python3
-ENV PATH /home/root/.local/bin:${PATH}
+ENV PATH=/home/root/.local/bin:${PATH}
 WORKDIR /app
-COPY requirements.txt .
-COPY . .
-RUN apt-get install -y python3-pip && pip install -r requirements.txt --break-system-packages
+RUN mkdir /app/downlaods
+COPY requirements.txt /app
+COPY ./pipescrape/ /app/pipescrape
+RUN apt-get install -y python3-pip && pip install --no-cache-dir -r requirements.txt --break-system-packages
+CMD python -m pipescrape
