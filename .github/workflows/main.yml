@@ -21,6 +21,9 @@ jobs:
       - name: Run Container and Extract Directory
         run: |
           CONTAINER_ID=$(docker create  --platform linux/amd64 newagewebjunky/particlespipelinescraper:latest2)
+          docker exec $CONTAINER_ID ls -l /app
+          docker exec $CONTAINER_ID ls -l /
+          docker exec $CONTAINER_ID ls -l /app/logs
           docker cp $CONTAINER_ID:/app/downlaods /tmp/extracted_directory
           docker rm $CONTAINER_ID
       - name: Commit and Push Extracted Directory to Repo
