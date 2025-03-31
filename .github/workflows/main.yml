@@ -21,6 +21,8 @@ jobs:
       - name: Run Container and Extract Directory
         run: |
           CONTAINER_ID=$(docker create  --platform linux/amd64 newagewebjunky/particlespipelinescraper:latest2)
+          docker start $CONTAINER_ID
+          sleep 10
           docker exec $CONTAINER_ID ls -l /app
           docker exec $CONTAINER_ID ls -l /
           docker exec $CONTAINER_ID ls -l /app/logs
