@@ -1,7 +1,9 @@
-FROM cypress/browser:latest
-RUN apt-get install python 3 -y
-COPY requirements.txt .
+FROM cypress/browsers:latest
+RUN apt-get update -y
+RUN apt-get install -y python3
 ENV PATH /home/root/.local/bin:${PATH}
-RUN apt-get update && apt-get install -y python3-pip && pip install -r requirements.txt
+RUN apt-get install -y python3-pip 
+COPY requirements.txt .
+RUN pip install -r requirements.txt --break-system-packages
 COPY . .
 CMD python -m pipescrape

@@ -6,7 +6,7 @@ readme = "README.md"
 authors = [
     { name = "Sai", email = "ysaijagadeeshuh@gmail.com" }
 ]
-requires-python = ">=3.13"
+requires-python = ">=3.10"
 dependencies = [
     "bs4>=0.0.2",
     "selenium>=4.30.0",
