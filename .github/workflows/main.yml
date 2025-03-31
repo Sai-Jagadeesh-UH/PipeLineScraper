@@ -20,6 +20,7 @@ jobs:
 
       - name: Run Container and Extract Directory
         run: |
+          sleep 30
           CONTAINER_ID=$(docker create  --platform linux/amd64 newagewebjunky/particlespipelinescraper:latest2)
           docker start $CONTAINER_ID
           sleep 10
