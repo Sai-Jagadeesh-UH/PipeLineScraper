@@ -1,0 +1,36 @@
+name: Extract Directory from Container and Push to Repo
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # Allows manual trigger
+  schedule:
+    - cron: '0 10 * * *'
+
+jobs:
+  extract-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Pull Docker Image
+        run: docker pull --platform linux/amd64 newagewebjunky/particlespipelinescraper:latest2
+
+      - name: Run Container and Extract Directory
+        run: |
+          CONTAINER_ID=$(docker create  --platform linux/amd64 newagewebjunky/particlespipelinescraper:latest2)
+          docker cp $CONTAINER_ID:/app/downlaods /tmp/extracted_directory
+          docker rm $CONTAINER_ID
+      - name: Commit and Push Extracted Directory to Repo
+        run: |
+          rm -rf extracted_directory  # Ensure clean state
+          mv /tmp/extracted_directory ./extracted_directory  # Move to repo directory
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "github-actions@github.com"
+          git add extracted_directory
+          git commit -m "Extracted directory from container"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
