@@ -8,11 +8,29 @@ from time import sleep
 from selenium.webdriver.common.keys import Keys
 from datetime import date, timedelta, datetime
 import sys
+import os
 
 
 def log(msg: str):
     print(msg)
     logging.info(msg)
+
+
+downlaodDir = os.path.join(os.getcwd(), "downlaods")
+os.makedirs(downlaodDir, exist_ok=True)
+
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--disable-dev-shm-usage')
+chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+prefs = {"profile.default_content_settings.popups": 0,
+         # Set the path accordingly
+         "download.default_directory": downlaodDir,
+         "download.prompt_for_download": False,  # change the downpath accordingly
+         "download.directory_upgrade": True}
+chrome_options.add_experimental_option("prefs", prefs)
 
 
 args = parser.parse_args()
@@ -33,7 +51,7 @@ else:
 
         log(f"executing from {from_date} to {till_date}")
 
-        driver = webdriver.Chrome()
+        driver = webdriver.Chrome(options=chrome_options,)
 
         driver.implicitly_wait(5)
 
