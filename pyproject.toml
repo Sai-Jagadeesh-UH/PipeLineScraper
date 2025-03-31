@@ -1,0 +1,20 @@
+[project]
+name = "pipescrape"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Sai", email = "ysaijagadeeshuh@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "bs4>=0.0.2",
+    "selenium>=4.30.0",
+]
+
+[project.scripts]
+pipescrape = "pipescrape:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
