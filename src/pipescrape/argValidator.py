@@ -21,15 +21,15 @@ class argValidator():
         self._Combs = {
             "t": vc("t",
                     [self.on_date],
-                    ["o"]),
+                    ['o']),
 
             "f": vc("f",
                     [self.on_date],
-                    ["o"]),
+                    ['o']),
 
             "o": vc("o",
                     [self.from_date, self.till_date],
-                    ["f", "t"])
+                    ['f", "t'])
         }
 
     def getString(self):
@@ -38,14 +38,14 @@ class argValidator():
         if any([self.from_date, self.till_date]) and not all([self.from_date, self.till_date]):
             return f" -t and -f cannot be used in isolation"
 
-        if self.from_date and any(self._Combs["f"].items):
-            return f"{self._Combs["f"].key} cannot be used with {self._Combs["f"].combstring}"
+        if self.from_date and any(self._Combs['f'].items):
+            return f"{self._Combs['f'].key} cannot be used with {self._Combs['f'].combstring}"
 
-        if self.till_date and any(self._Combs["t"].items):
-            return f"{self._Combs["t"].key} cannot be used with {self._Combs["t"].combstring}"
+        if self.till_date and any(self._Combs['t'].items):
+            return f"{self._Combs['t'].key} cannot be used with {self._Combs['t'].combstring}"
 
-        if self.on_date and any(self._Combs["o"].items):
-            return f"{self._Combs["o"].key} cannot be used with {self._Combs["o"].combstring}"
+        if self.on_date and any(self._Combs['o'].items):
+            return f"{self._Combs['o'].key} cannot be used with {self._Combs['o'].combstring}"
 
         return self.dataValidity()
 

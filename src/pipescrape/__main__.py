@@ -64,7 +64,7 @@ else:
             datel.send_keys(Keys.BACK_SPACE)
             datel.send_keys(Keys.BACK_SPACE)
             datel.send_keys(Keys.BACK_SPACE)
-            log(f"enternig {curdate.strftime(r"%m%d%Y")}")
+            log(f"entering {curdate.strftime(r'%m%d%Y')}")
             datel.send_keys(curdate.strftime(r"%m%d%Y"))
 
             datel.send_keys(Keys.RETURN)
